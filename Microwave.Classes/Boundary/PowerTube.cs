@@ -3,47 +3,41 @@ using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Boundary
 {
-	public class PowerTube : IPowerTube
-	{
-		private IOutput myOutput;
+    public class PowerTube : IPowerTube
+    {
+        private IOutput myOutput;
 
-		private bool IsOn = false;
+        private bool IsOn = false;
 
-		public int Power { get; set; } = 50;
+        public PowerTube(IOutput output)
+        {
+            myOutput = output;
+        }
 
-		public PowerTube(IOutput output)
-		{
-			myOutput = output;
+        public void TurnOn(int power)
+        {
+            if (power < 1 || 700 < power)
+            {
+                throw new ArgumentOutOfRangeException("power", power, "Must be between 1 and 700 (incl.)");
+            }
 
-			Console.Write("How much power is needed: ");
-			string p = Console.ReadLine();
-			Power = int.TryParse(p, out int pow) ? pow : throw new ArgumentException($"{p} is not a number");
-		}
+            if (IsOn)
+            {
+                throw new ApplicationException("PowerTube.TurnOn: is already on");
+            }
 
-		public void TurnOn(int power)
-		{
-			if (power < 1 || 700 < power)
-			{
-				throw new ArgumentOutOfRangeException("power", power, "Must be between 1 and 700 (incl.)");
-			}
+            myOutput.OutputLine($"PowerTube works with {power}");
+            IsOn = true;
+        }
 
-			if (IsOn)
-			{
-				throw new ApplicationException("PowerTube.TurnOn: is already on");
-			}
+        public void TurnOff()
+        {
+            if (IsOn)
+            {
+                myOutput.OutputLine($"PowerTube turned off");
+            }
 
-			myOutput.OutputLine($"PowerTube works with {power}");
-			IsOn = true;
-		}
-
-		public void TurnOff()
-		{
-			if (IsOn)
-			{
-				myOutput.OutputLine($"PowerTube turned off");
-			}
-
-			IsOn = false;
-		}
-	}
+            IsOn = false;
+        }
+    }
 }
