@@ -22,6 +22,7 @@ namespace Microwave.Test.Unit
         private IBuzzer buzzer;
 
         private ICookController cooker;
+        private IPowerTube powerTube;
 
         [SetUp]
         public void Setup()
