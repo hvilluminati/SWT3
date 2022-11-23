@@ -16,6 +16,8 @@ namespace Microwave.Classes.Boundary
         public void MakeBuzzerSound()
         {
             myOutput.OutputLine("Making Buzzer Sound");
+
+            //Making buzzer sound from pc
             Console.Beep(659, 205);
             Thread.Sleep(125);
             Console.Beep(659, 205);
