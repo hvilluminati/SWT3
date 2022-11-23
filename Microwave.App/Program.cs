@@ -49,7 +49,7 @@ namespace Microwave.App
 
             System.Console.WriteLine("When you press enter, the program will stop. Input 'U' to add 5 seconds or 'L' to subtract.");
             // Wait for input
-            var input = System.Console.ReadLine().ToLower();
+            var input = " ";
             while (input!="")
             {
                 input = System.Console.ReadLine().ToLower();
