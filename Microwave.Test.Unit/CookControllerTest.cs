@@ -112,5 +112,21 @@ namespace Microwave.Test.Unit
             display.Received().ShowTime(0, 55);
         }
 
+        [TestCase(4)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-4)]
+        public void Cooking_TimerSubtracted_DisplayShowsNoNegatives(int initialTime)
+        {
+            uut.StartCooking(50, 60);
+
+            timer.TimeRemaining.Returns(initialTime);
+            subtractButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
+
+            display.Received().ShowTime(0, 1);
+        }
+
     }
 }
