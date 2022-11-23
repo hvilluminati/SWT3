@@ -26,9 +26,7 @@ namespace Microwave.App
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
-
-            ui.setPower();
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, powerTube);
 
             // Finish the double association
             cooker.UI = ui;
@@ -37,7 +35,7 @@ namespace Microwave.App
 
             powerButton.Press();
 
-            timeButton.Press();
+			timeButton.Press();
 
             startCancelButton.Press();
 
