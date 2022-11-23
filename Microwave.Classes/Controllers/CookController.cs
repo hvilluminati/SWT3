@@ -109,7 +109,7 @@ namespace Microwave.Classes.Controllers
 
         public void OnTimeSubtractButton(object sender, EventArgs e)
         {
-            myTimer.TimeRemaining -= 60;
+            myTimer.TimeRemaining -= 5;
             if(myTimer.TimeRemaining < 0)
             {
                 myTimer.TimeRemaining = 1;
