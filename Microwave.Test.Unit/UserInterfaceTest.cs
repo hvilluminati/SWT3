@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
@@ -21,7 +22,7 @@ namespace Microwave.Test.Unit
         private ILight light;
 
         private ICookController cooker;
-        private IPowerTube powerTube;
+        private PowerTube powerTube;
 
         [SetUp]
         public void Setup()
@@ -33,7 +34,10 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
-            powerTube = Substitute.For<IPowerTube>();
+
+            Output output = Substitute.For<Output>();
+
+            powerTube = new PowerTube(output);
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
