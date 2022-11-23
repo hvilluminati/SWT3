@@ -14,7 +14,10 @@ namespace Microwave.Classes.Boundary
         public PowerTube(IOutput output)
         {
             myOutput = output;
+		}
 
+        public void setPower()
+        {
 			Console.Write("How much power is needed: ");
 			string p = Console.ReadLine();
 			maxPower = int.TryParse(p, out int pow) ? pow : throw new ArgumentException($"{p} is not a number");
