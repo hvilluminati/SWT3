@@ -14,12 +14,38 @@ namespace Microwave.Classes.Controllers
         private IDisplay myDisplay;
         private IPowerTube myPowerTube;
         private ITimer myTimer;
+        private IButton myTimeAddButton;
+        private IButton myTimeSubtractButton;
+
+        //public CookController(
+        //    ITimer timer,
+        //    IDisplay display,
+        //    IPowerTube powerTube,
+        //    IUserInterface ui) : this(timer, display, powerTube)
+        //{
+        //    UI = ui;
+        //}
+
+        //public CookController(
+        //    ITimer timer,
+        //    IDisplay display,
+        //    IPowerTube powerTube)
+        //{
+        //    myTimer = timer;
+        //    myDisplay = display;
+        //    myPowerTube = powerTube;
+
+        //    timer.Expired += new EventHandler(OnTimerExpired);
+        //    timer.TimerTick += new EventHandler(OnTimerTick);
+        //}
 
         public CookController(
             ITimer timer,
             IDisplay display,
             IPowerTube powerTube,
-            IUserInterface ui) : this(timer, display, powerTube)
+            IButton timeAddButton,
+            IButton timeSubtractButton,
+            IUserInterface ui) : this(timer, display, powerTube, timeAddButton, timeSubtractButton)
         {
             UI = ui;
         }
@@ -27,14 +53,20 @@ namespace Microwave.Classes.Controllers
         public CookController(
             ITimer timer,
             IDisplay display,
-            IPowerTube powerTube)
+            IPowerTube powerTube, 
+            IButton timeAddButton,
+            IButton timeSubtractButton)
         {
             myTimer = timer;
             myDisplay = display;
             myPowerTube = powerTube;
+            myTimeAddButton = timeAddButton;
+            myTimeSubtractButton = timeSubtractButton;
 
             timer.Expired += new EventHandler(OnTimerExpired);
             timer.TimerTick += new EventHandler(OnTimerTick);
+            timeAddButton.Pressed += new EventHandler(OnTimeAddButton);
+            timeSubtractButton.Pressed += new EventHandler(OnTimeSubtractButton);
         }
 
         public void StartCooking(int power, int time)
@@ -68,6 +100,16 @@ namespace Microwave.Classes.Controllers
                 int remaining = myTimer.TimeRemaining;
                 myDisplay.ShowTime(remaining / 60, remaining % 60);
             }
+        }
+
+        public void OnTimeAddButton(object sender, EventArgs e)
+        {
+            myTimer.TimeRemaining += 5;
+        }
+
+        public void OnTimeSubtractButton(object sender, EventArgs e)
+        {
+            myTimer.TimeRemaining -= 5;
         }
     }
 }
