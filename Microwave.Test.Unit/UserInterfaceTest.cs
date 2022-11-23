@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
@@ -22,7 +23,7 @@ namespace Microwave.Test.Unit
         private IBuzzer buzzer;
 
         private ICookController cooker;
-        private IPowerTube powerTube;
+        private PowerTube powerTube;
 
         [SetUp]
         public void Setup()
