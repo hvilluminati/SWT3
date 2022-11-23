@@ -19,8 +19,9 @@ namespace Microwave.App
             Display display = new Display(output);
 
             PowerTube powerTube = new PowerTube(output);
+            powerTube.setPower();
 
-            Light light = new Light(output);
+			Light light = new Light(output);
 
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
