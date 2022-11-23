@@ -17,27 +17,27 @@ namespace Microwave.Classes.Controllers
         private IButton myTimeAddButton;
         private IButton myTimeSubtractButton;
 
-        //public CookController(
-        //    ITimer timer,
-        //    IDisplay display,
-        //    IPowerTube powerTube,
-        //    IUserInterface ui) : this(timer, display, powerTube)
-        //{
-        //    UI = ui;
-        //}
+        public CookController(
+            ITimer timer,
+            IDisplay display,
+            IPowerTube powerTube,
+            IUserInterface ui) : this(timer, display, powerTube)
+        {
+            UI = ui;
+        }
 
-        //public CookController(
-        //    ITimer timer,
-        //    IDisplay display,
-        //    IPowerTube powerTube)
-        //{
-        //    myTimer = timer;
-        //    myDisplay = display;
-        //    myPowerTube = powerTube;
+        public CookController(
+            ITimer timer,
+            IDisplay display,
+            IPowerTube powerTube)
+        {
+            myTimer = timer;
+            myDisplay = display;
+            myPowerTube = powerTube;
 
-        //    timer.Expired += new EventHandler(OnTimerExpired);
-        //    timer.TimerTick += new EventHandler(OnTimerTick);
-        //}
+            timer.Expired += new EventHandler(OnTimerExpired);
+            timer.TimerTick += new EventHandler(OnTimerTick);
+        }
 
         public CookController(
             ITimer timer,
