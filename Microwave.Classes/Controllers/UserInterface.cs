@@ -50,13 +50,6 @@ namespace Microwave.Classes.Controllers
             time = 1;
         }
 
-        public void setPower()
-        {
-			Console.Write("How much power is needed: ");
-			string p = Console.ReadLine();
-			powerLevel = int.TryParse(p, out int pow) ? pow : throw new ArgumentException($"{p} is not a number");
-		}
-
         public void OnPowerPressed(object sender, EventArgs e)
         {
             switch (myState)
