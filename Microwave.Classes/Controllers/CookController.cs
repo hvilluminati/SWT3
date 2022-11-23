@@ -104,15 +104,21 @@ namespace Microwave.Classes.Controllers
 
         public void OnTimeAddButton(object sender, EventArgs e)
         {
-            myTimer.TimeRemaining += 5;
+            if (isCooking)
+            {
+                myTimer.TimeRemaining += 5;
+            }
         }
 
         public void OnTimeSubtractButton(object sender, EventArgs e)
         {
-            myTimer.TimeRemaining -= 5;
-            if(myTimer.TimeRemaining < 0)
+            if (isCooking)
             {
-                myTimer.TimeRemaining = 1;
+                myTimer.TimeRemaining -= 5;
+                if (myTimer.TimeRemaining < 0)
+                {
+                    myTimer.TimeRemaining = 1;
+                }
             }
         }
     }
