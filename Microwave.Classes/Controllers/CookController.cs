@@ -37,10 +37,7 @@ namespace Microwave.Classes.Controllers
             timer.TimerTick += new EventHandler(OnTimerTick);
         }
 
-        public int maxPower { 
-            get { return myPowerTube.maxPower; }
-            set { myPowerTube.maxPower = value; }
-        }
+        public int maxPower { get { return myPowerTube.maxPower; } }
 
         public void setPower() { myPowerTube.setPower(); }
 
