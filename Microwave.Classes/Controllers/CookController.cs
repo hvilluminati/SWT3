@@ -69,10 +69,7 @@ namespace Microwave.Classes.Controllers
             timeSubtractButton.Pressed += new EventHandler(OnTimeSubtractButton);
         }
 
-        public int maxPower { 
-            get { return myPowerTube.maxPower; }
-            set { myPowerTube.maxPower = value; }
-        }
+        public int maxPower { get { return myPowerTube.maxPower; } }
 
         public void setPower() { myPowerTube.setPower(); }
 
