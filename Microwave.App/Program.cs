@@ -30,11 +30,9 @@ namespace Microwave.App
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
             CookController cooker = new CookController(timer, display, powerTube, timeAddButton, timeSubtractButton);
+            cooker.setPower();
 
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
-
-
-            ui.setPower();
 
             // Finish the double association
             cooker.UI = ui;
