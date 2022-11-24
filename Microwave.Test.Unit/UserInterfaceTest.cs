@@ -23,7 +23,6 @@ namespace Microwave.Test.Unit
         private ILight light;
 
         private ICookController cooker;
-        private PowerTube powerTube;
 
         [SetUp]
         public void Setup()
@@ -35,10 +34,7 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
-
-            Output output = Substitute.For<Output>();
-
-            powerTube = new PowerTube(output);
+            cooker.maxPower = 700;
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
@@ -348,7 +344,7 @@ namespace Microwave.Test.Unit
             var input = new StringReader("150");
             Console.SetIn(input);
 
-            uut.setPower();
+            cooker.setPower();
 
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
