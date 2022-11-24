@@ -69,7 +69,14 @@ namespace Microwave.Classes.Controllers
             timeSubtractButton.Pressed += new EventHandler(OnTimeSubtractButton);
         }
 
-        public void StartCooking(int power, int time)
+        public int maxPower { 
+            get { return myPowerTube.maxPower; }
+            set { myPowerTube.maxPower = value; }
+        }
+
+        public void setPower() { myPowerTube.setPower(); }
+
+		public void StartCooking(int power, int time)
         {
             myPowerTube.TurnOn(power);
             myTimer.Start(time);
