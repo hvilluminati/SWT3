@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using Microwave.Classes.Boundary;
 using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
@@ -34,6 +36,7 @@ namespace Microwave.Test.Unit
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
             buzzer = Substitute.For<IBuzzer>();
+            cooker.maxPower.Returns(700);
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
@@ -351,8 +354,6 @@ namespace Microwave.Test.Unit
 
             light.Received(1).TurnOff();
         }
-
-
     }
 
 }
