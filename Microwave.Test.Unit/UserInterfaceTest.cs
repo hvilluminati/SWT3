@@ -337,22 +337,6 @@ namespace Microwave.Test.Unit
 
             light.Received(1).TurnOff();
         }
-
-        [Test]
-        public void Set_Power_To_50_4Power_Button_Presses()
-        {
-            var input = new StringReader("150");
-            Console.SetIn(input);
-
-            cooker.setPower();
-
-			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
-			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
-			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
-			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
-
-			display.Received(2).ShowPower(Arg.Is<int>(50));
-        }
     }
 
 }

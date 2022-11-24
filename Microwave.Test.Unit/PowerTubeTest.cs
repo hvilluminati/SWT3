@@ -3,6 +3,9 @@ using Microwave.Classes.Interfaces;
 using NSubstitute;
 using NSubstitute.Core.Arguments;
 using NUnit.Framework;
+using System.IO;
+using System.Net;
+using System;
 
 namespace Microwave.Test.Unit
 {
@@ -61,5 +64,16 @@ namespace Microwave.Test.Unit
             uut.TurnOn(50);
             Assert.Throws<System.ApplicationException>(() => uut.TurnOn(60));
         }
-    }
+
+		[Test]
+		public void Set_Power_To_150()
+		{
+			var input = new StringReader("150");
+			Console.SetIn(input);
+
+			uut.setPower();
+
+            Assert.That(uut.maxPower, Is.EqualTo(150));
+		}
+	}
 }
