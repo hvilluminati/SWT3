@@ -361,7 +361,7 @@ namespace Microwave.Test.Unit
             var input = new StringReader("150");
             Console.SetIn(input);
 
-            powerTube.setPower();
+            uut.setPower();
 
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);

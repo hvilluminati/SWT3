@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Microwave.Classes.Interfaces;
+using Microwave.Classes.Boundary;
 
 namespace Microwave.Classes.Controllers
 {
@@ -21,7 +22,7 @@ namespace Microwave.Classes.Controllers
         private int powerLevel = 50;
         private int time = 1;
 
-        public UserInterface(
+		public UserInterface(
             IButton powerButton,
             IButton timeButton,
             IButton startCancelButton,
@@ -43,6 +44,8 @@ namespace Microwave.Classes.Controllers
             myDisplay = display;
             myBuzzer = buzzer;
         }
+
+        public void setPower() { myPowerTube.setPower(); }
 
         private void ResetValues()
         {
