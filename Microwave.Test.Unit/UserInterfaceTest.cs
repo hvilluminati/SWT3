@@ -36,6 +36,7 @@ namespace Microwave.Test.Unit
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
             buzzer = Substitute.For<IBuzzer>();
+            cooker.maxPower.Returns(700);
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
