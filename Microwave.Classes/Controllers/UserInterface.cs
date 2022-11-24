@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using Microwave.Classes.Interfaces;
+using Microwave.Classes.Boundary;
 
 namespace Microwave.Classes.Controllers
 {
@@ -16,20 +17,19 @@ namespace Microwave.Classes.Controllers
         private ICookController myCooker;
         private ILight myLight;
         private IDisplay myDisplay;
-        private IPowerTube myPowerTube;
+        private PowerTube myPowerTube;
 
         private int powerLevel = 50;
         private int time = 1;
 
-        public UserInterface(
+		public UserInterface(
             IButton powerButton,
             IButton timeButton,
             IButton startCancelButton,
             IDoor door,
             IDisplay display,
             ILight light,
-            ICookController cooker,
-            IPowerTube powerTube)
+            ICookController cooker)
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
@@ -41,8 +41,10 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
-            myPowerTube = powerTube;
+            myPowerTube = new PowerTube(new Output());
         }
+
+        public void setPower() { myPowerTube.setPower(); }
 
         private void ResetValues()
         {
