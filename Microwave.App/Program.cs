@@ -12,6 +12,9 @@ namespace Microwave.App
             Button powerButton = new Button();
             Button timeButton = new Button();
 
+            Button timeAddButton = new Button();
+            Button timeSubtractButton = new Button();
+
             Door door = new Door();
 
             Output output = new Output();
@@ -26,7 +29,7 @@ namespace Microwave.App
 
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
-            CookController cooker = new CookController(timer, display, powerTube);
+            CookController cooker = new CookController(timer, display, powerTube, timeAddButton, timeSubtractButton);
 
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
 
@@ -44,10 +47,21 @@ namespace Microwave.App
 
             // The simple sequence should now run
 
-            System.Console.WriteLine("When you press enter, the program will stop");
+            System.Console.WriteLine("When you press enter, the program will stop. Input 'U' to add 5 seconds or 'L' to subtract.");
             // Wait for input
-
-            System.Console.ReadLine();
+            var input = " ";
+            while (input!="")
+            {
+                input = System.Console.ReadLine().ToLower();
+                if (input=="u")
+                {
+                    timeAddButton.Press();
+                }
+                else if (input=="l")
+                {
+                    timeSubtractButton.Press();
+                }
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Microwave.Test.Unit
         private ITimer timer;
         private IDisplay display;
         private IPowerTube powerTube;
+        private IButton addButton;
+        private IButton subtractButton;
 
         [SetUp]
         public void Setup()
@@ -23,8 +25,10 @@ namespace Microwave.Test.Unit
             timer = Substitute.For<ITimer>();
             display = Substitute.For<IDisplay>();
             powerTube = Substitute.For<IPowerTube>();
+            addButton = Substitute.For<IButton>();
+            subtractButton = Substitute.For<IButton>();
 
-            uut = new CookController(timer, display, powerTube, ui);
+            uut = new CookController(timer, display, powerTube, addButton, subtractButton, ui);
         }
 
         [Test]
@@ -81,6 +85,47 @@ namespace Microwave.Test.Unit
             uut.Stop();
 
             powerTube.Received().TurnOff();
+        }
+
+
+        [Test]
+        public void Cooking_TimerAdded_DisplayCallsCorrectTime()
+        {
+            uut.StartCooking(50, 60);
+
+            timer.TimeRemaining.Returns(60);
+            addButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
+
+            display.Received().ShowTime(1, 5);
+        }
+
+        [Test]
+        public void Cooking_TimerSubtracted_DisplayCallsCorrectTime()
+        {
+            uut.StartCooking(50, 60);
+
+            timer.TimeRemaining.Returns(60);
+            subtractButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
+
+            display.Received().ShowTime(0, 55);
+        }
+
+        [TestCase(4)]
+        [TestCase(1)]
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(-4)]
+        public void Cooking_TimerSubtracted_DisplayShowsNoNegatives(int initialTime)
+        {
+            uut.StartCooking(50, 60);
+
+            timer.TimeRemaining.Returns(initialTime);
+            subtractButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
+
+            display.Received().ShowTime(0, 1);
         }
 
     }
