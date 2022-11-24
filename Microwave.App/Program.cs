@@ -19,13 +19,13 @@ namespace Microwave.App
             Display display = new Display(output);
 
             PowerTube powerTube = new PowerTube(output);
-            powerTube.setPower();
 
 			Light light = new Light(output);
 
             Microwave.Classes.Boundary.Timer timer = new Timer();
 
             CookController cooker = new CookController(timer, display, powerTube);
+            cooker.setPower();
 
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
 
@@ -35,6 +35,8 @@ namespace Microwave.App
             // Simulate a simple sequence
 
             powerButton.Press();
+			powerButton.Press();
+			powerButton.Press();
 
 			timeButton.Press();
 
