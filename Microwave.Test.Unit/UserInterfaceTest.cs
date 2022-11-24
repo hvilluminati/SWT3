@@ -24,7 +24,6 @@ namespace Microwave.Test.Unit
         private IBuzzer buzzer;
 
         private ICookController cooker;
-        private PowerTube powerTube;
 
         [SetUp]
         public void Setup()
@@ -361,7 +360,7 @@ namespace Microwave.Test.Unit
             var input = new StringReader("150");
             Console.SetIn(input);
 
-            uut.setPower();
+            cooker.setPower();
 
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 			powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
